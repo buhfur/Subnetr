@@ -28,25 +28,26 @@ def ip4_to_binary(x):
 '''
 
 
+''' 
+IN : <class 'str'>
+OUT: <class 'str'> -> prints out binary string list of 
+the network address
+'''
 def get_net_addr(ip , mask, literal=None):
     net_addr = [] 
     ip = ip4_to_binary(ip)
     mask = ip4_to_binary(mask)
 
-    # performs binary AND 1-to-1 on both arrays 
-    # ip[x] & mask[x] essentially
     for x in range(len(ip)): 
         net_addr.append(bin( int(ip[x], 2)  & int(mask[x], 2)))
 
-
     #TODO : change this to use command line arguments instead
     if literal: 
-        # strips out the '0b' in front of every binary number 
-        s_net_addr = [] # array containing stripped values
+        s_net_addr = [] 
         for y in net_addr: 
-            s_net_addr.append(y[2:])
+            s_net_addr.append(y[2:]) 
+        return s_net_addr 
 
-        return s_net_addr
     else:
         for x in range(len(net_addr)): 
             net_addr[x] = str(int(net_addr[x], 2 ))
@@ -66,9 +67,7 @@ OUT: octet output of all
 
 def get_net_range(net_addr, mask):
     # bitwise AND the subnet mask and bitwise OR with the net_addr
-
     mask = ip4_to_binary(mask) 
-
     # bitwise subnet mask with itself
     a_mask = [bin( int(mask[x], 2) & int(mask[x], 2) ) for x in range(len(mask))]
 
@@ -76,27 +75,21 @@ def get_net_range(net_addr, mask):
     for y in a_mask:
         print(bin(int(y, 2) > 1))
 
+    ## using chatgpt instructions
+
+    # convert 255 to binary
+
+    # convert 0 to binary 
+
+    # Bitwise 255 AND 0 
+
+    # Convert the binary value back to decimal
+
+
 
 def get_net_avail_hosts(ip):
     return 
 
 
-
-if __name__ == '__main__':
-
-
-    if sys.argv[1] and sys.argv[2]:
-
-        ip = sys.argv[1]
-        mask = sys.argv[2]
-        net_addr = get_net_addr(ip, mask)
-
-
-        print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{net_addr}\n")
-
-        net_range = get_net_range(net_addr, mask)
-
-    else:
-        print('ERROR: no IP or subnet mask found ')
 
 
