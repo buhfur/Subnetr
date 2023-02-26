@@ -33,6 +33,8 @@ def get_net_addr(ip , mask, literal=None):
     ip = ip4_to_binary(ip)
     mask = ip4_to_binary(mask)
 
+    # performs binary AND 1-to-1 on both arrays 
+    # ip[x] & mask[x] essentially
     for x in range(len(ip)): 
         net_addr.append(bin( int(ip[x], 2)  & int(mask[x], 2)))
 
@@ -63,8 +65,17 @@ OUT: octet output of all
 '''
 
 def get_net_range(net_addr, mask):
+    # bitwise AND the subnet mask and bitwise OR with the net_addr
 
-    return 
+    mask = ip4_to_binary(mask) 
+
+    # bitwise subnet mask with itself
+    a_mask = [bin( int(mask[x], 2) & int(mask[x], 2) ) for x in range(len(mask))]
+
+    # TODO : convert 255.255.255.0 -> 0.0.0.255
+    for y in a_mask:
+        print(bin(int(y, 2) > 1))
+
 
 def get_net_avail_hosts(ip):
     return 
@@ -73,8 +84,19 @@ def get_net_avail_hosts(ip):
 
 if __name__ == '__main__':
 
-    if sys.argv[1] and sys.argv[2]:
-        print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{get_net_addr(sys.argv[1], sys.argv[2])}\n")
 
-    net_addr = get_net_addr(sys.argv[1], sys.argv[2])
+    if sys.argv[1] and sys.argv[2]:
+
+        ip = sys.argv[1]
+        mask = sys.argv[2]
+        net_addr = get_net_addr(ip, mask)
+
+
+        print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{net_addr}\n")
+
+        net_range = get_net_range(net_addr, mask)
+
+    else:
+        print('ERROR: no IP or subnet mask found ')
+
 
