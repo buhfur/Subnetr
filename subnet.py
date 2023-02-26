@@ -22,8 +22,11 @@ def ip4_to_binary(x):
         binary_octet_list.append(bin(int(octet)))  # appends as string
     return binary_octet_list
         
-''' function that returns the identified IPv4 network address in binary '''
-def get_net_addr(ip , mask, literal=1):
+''' function that returns the identified IPv4 network address in binary 
+'''
+
+
+def get_net_addr(ip , mask, literal=None):
     net_addr = [] 
     ip = ip4_to_binary(ip)
     mask = ip4_to_binary(mask)
@@ -34,15 +37,19 @@ def get_net_addr(ip , mask, literal=1):
 
     #TODO : change this to use command line arguments instead
     if literal: 
-        # strip out the '0b' in front of every binary number 
-        print('it works') 
+        # strips out the '0b' in front of every binary number 
         s_net_addr = [] # array containing stripped values
         for y in net_addr: 
             s_net_addr.append(y[2:])
 
-        return s_net_addr 
+        return s_net_addr
     else:
-        return net_addr
+        for x in range(len(net_addr)): 
+            net_addr[x] = str(int(net_addr[x], 2 ))
+
+        
+    return (".".join(net_addr)) 
+
     
     
     
@@ -59,6 +66,6 @@ def get_net_avail_hosts(ip):
 if __name__ == '__main__':
 
     if sys.argv[1] and sys.argv[2]:
-        print(get_net_addr(sys.argv[1], sys.argv[2])) 
+        print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{get_net_addr(sys.argv[1], sys.argv[2])}\n")
 
 
