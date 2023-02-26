@@ -2,6 +2,8 @@
 # Ryan McVicker 2/25/2023
 import sys 
 
+
+#TODO: allow reading IP packets and perform the translation there 
 ''' 
 
 This is a very basic implementation of what I think a Network 
@@ -55,7 +57,13 @@ def get_net_addr(ip , mask, literal=None):
     
 
 
-def get_net_range(ip):
+''' 
+IN : IPv4 address
+OUT: octet output of all 
+'''
+
+def get_net_range(net_addr, mask):
+
     return 
 
 def get_net_avail_hosts(ip):
@@ -68,4 +76,5 @@ if __name__ == '__main__':
     if sys.argv[1] and sys.argv[2]:
         print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{get_net_addr(sys.argv[1], sys.argv[2])}\n")
 
+    net_addr = get_net_addr(sys.argv[1], sys.argv[2])
 
