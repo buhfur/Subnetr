@@ -23,16 +23,13 @@ def ip4_to_binary(x):
     return binary_octet_list
         
 ''' function that returns the identified IPv4 network address in binary '''
-def get_net_addr(ip , mask, literal=None):
-    # hint : binary AND 
+def get_net_addr(ip , mask, literal=1):
     net_addr = [] 
     ip = ip4_to_binary(ip)
     mask = ip4_to_binary(mask)
 
     for x in range(len(ip)): 
-        
         net_addr.append(bin( int(ip[x], 2)  & int(mask[x], 2)))
-        #TODO: fix bug saying both ip[x] and mask[x] is a string 
 
 
     #TODO : change this to use command line arguments instead
@@ -41,12 +38,11 @@ def get_net_addr(ip , mask, literal=None):
         print('it works') 
         s_net_addr = [] # array containing stripped values
         for y in net_addr: 
-            s_net_addr.append(y[:2])
+            s_net_addr.append(y[2:])
 
-        return net_addr 
-
-
-    return net_addr
+        return s_net_addr 
+    else:
+        return net_addr
     
     
     
