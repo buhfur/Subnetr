@@ -21,25 +21,28 @@ Options:
 '''
 
 
+
+'''
+IN : None 
+OUT: 0 or 1 ( 0 indicating success ) 
+'''
+def test_get_net_addr() -> int:  
+  
+  return 1
+
+
+
+''' 
+IN: None
+OUT: Unknown
+'''
+def test_ip4_gen():
+  
+  ip4_gen()
+
+
+
 if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("")
-
-    parser.add_argument(""
-    parser.parse_args() 
-
-'''    if sys.argv[1] and sys.argv[2]:
-
-        ip = sys.argv[1]
-        mask = sys.argv[2]
-        net_addr = get_net_addr(ip, mask)
+  test_ip4_gen()
 
 
-        print(f"\nIP address:\n\t{sys.argv[1]}\nSubnet Mask:\n\t{sys.argv[2]}\nNetwork Address:\n\t{net_addr}\n")
-
-        net_range = get_net_range(net_addr, mask)
-
-    else:
-        
-        '''
