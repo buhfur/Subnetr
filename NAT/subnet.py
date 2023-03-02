@@ -63,7 +63,7 @@ OPTIONS:
     
 '''
 
-#TODO: format output into a table 
+#TODO: format output from get_net_addr into a table which shows all forms of output
 def get_net_addr(ip , mask ):
     net_addr = [] 
     ip = ip4_to_binary(ip)
@@ -83,7 +83,7 @@ def get_net_addr(ip , mask ):
 
 ''' 
 IN : <class 'list'> -> list of binary strings 
-OUT: <class ''
+OUT: <class 'int'> -> integer of the iP range? 
 '''
 
 def get_net_range(net_addr, mask):
@@ -92,7 +92,7 @@ def get_net_range(net_addr, mask):
     # bitwise subnet mask with itself
     a_mask = [ bin( int(mask[x], 2) & int(mask[x], 2) ) for x in range(len(mask))]
 
-    # TODO : convert subnet mask -> 255.255.255.0 -> 0.0.0.255
+    # TODO : convert subnet mask to host mask
     for y in a_mask:
       print(bin(~int(y, 3)))
 
