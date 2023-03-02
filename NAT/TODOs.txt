@@ -1,0 +1,7 @@
+main.py:#TODO: parse output for correctness in testing
+main.py:#TODO: parse command line args with argparse
+main.py:TODO: enable the user to specify whether they want the 
+main.py:TODO: enable to user to specify only private IP addresses 
+subnet.py:    #TODO: add command line arguments to
+subnet.py:#TODO: format output into a table 
+subnet.py:    # TODO : convert subnet mask -> 255.255.255.0 -> 0.0.0.255

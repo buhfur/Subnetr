@@ -2,6 +2,9 @@
 # Ryan McVicker 2/25/2023
 import sys 
 import random 
+import os
+from base64 import b64encode
+
 
 ''' 
 
@@ -14,65 +17,62 @@ Problem I want to solve : given an IPv4 address and a subnet mask ,
  '''
 
 
-''' my own little method to convert UTF-8 string ip addresses
-to a list of binary numbers '''
-def ip4_to_binary(x):
+'''
+IN: <class 'str'> -> string of IPv4 address in dot notation
+OUT: <class 'list'> -> list of python3 binary strings unless 
+specified otherwise 
+
+'''
+def ip4_to_binary(x, literal=False):
 
     binary_octet_list = []
     for octet in x.split('.'):
         binary_octet_list.append(bin(int(octet)))  # appends as string
+
+    if literal: 
+        s_bin_list = [] 
+        for y in binary_octet_list: 
+            s_bin_list.append(y[2:]) 
+        return s_bin_list
+
     return binary_octet_list
 
-
 '''
-my own little ipv4 generator 
-
-IN : None
-OUT: <class 'list'> 
-
+IN : <class 'int'> -> how many addresses you want to generate
+OUT: <class 'list'> -> list of genrated IP addresses 
 ''' 
 
-def ip4_gen(): 
-  
-  with open('/dev/urandom', 'rb') as file: # NOTE: I don't know how , but this line crashed my computer
-    print(file.readlines())  # what happen? 
-  
+def ip4_gen(x): 
+    #generate 4 random numbers betwen the range of 10-255
+    r_ip_addr = [str(random.randrange(256)) for x in range(4)]
+    
+    print('.'.join(r_ip_addr))
+
+
   
 '''
 IN : <class 'str'>
-OUT: <class 'str'> -> prints out binary string list of 
+OUT: <class 'list'> -> prints out binary string list of 
 the network address
 
 get_net_addr(ip , mask, literal=None)
 
-parameters:
+OPTIONS:
 
-        ip: IPv4 address 
-        mask: IPv4 Subnet mask 
-        literal: default option unless verbose output is specified , 
-        addresses are represented in their 4 dot notation rather than a list
-        of binary strings 
-
+    #TODO: add command line arguments to
+    
 '''
 
-def get_net_addr(ip , mask, literal=None):
+#TODO: format output into a table 
+def get_net_addr(ip , mask ):
     net_addr = [] 
     ip = ip4_to_binary(ip)
     mask = ip4_to_binary(mask)
 
-    for x in range(len(ip)): 
-        net_addr.append(bin( int(ip[x], 2)  & int(mask[x], 2)))
+    net_addr = [ bin( int(ip[x], 2) & int(mask[x], 2) ) for x in range(len(ip))]
 
-    if literal: 
-        s_net_addr = [] 
-        for y in net_addr: 
-            s_net_addr.append(y[2:]) 
-        return s_net_addr 
-
-    else:
-        for x in range(len(net_addr)): 
-            net_addr[x] = str(int(net_addr[x], 2 ))
-
+    # strips the "0b" in front of each string
+    net_addr = [str(int(net_addr[x], 2 )) for x in range(len(net_addr))]
         
     return (".".join(net_addr)) 
 
@@ -82,8 +82,8 @@ def get_net_addr(ip , mask, literal=None):
 
 
 ''' 
-IN : IPv4 address
-OUT: octet output of all 
+IN : <class 'list'> -> list of binary strings 
+OUT: <class ''
 '''
 
 def get_net_range(net_addr, mask):
@@ -100,6 +100,11 @@ def get_net_range(net_addr, mask):
     
 
 
+'''
+
+IN: 
+
+'''
 
 def get_net_avail_hosts(ip):
     return 

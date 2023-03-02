@@ -3,8 +3,8 @@ from subnet import *
 import argparse 
 
 
+#TODO: parse output for correctness in testing
 #TODO: parse command line args with argparse
-
 
 
 '''
@@ -27,22 +27,33 @@ IN : None
 OUT: 0 or 1 ( 0 indicating success ) 
 '''
 def test_get_net_addr() -> int:  
-  
-  return 1
+    # use list of generated IP addresses 
+    get_net_addr()
+
+    return 1
 
 
 
 ''' 
-IN: None
-OUT: Unknown
-'''
-def test_ip4_gen():
-  
-  ip4_gen()
+IN: <class 'int'> -> specifies how many addresses you want to generate
 
+OUT: <class 'list'> -> list of generated IP addresses 
+
+TODO: enable the user to specify whether they want the 
+same network address for all 
+
+TODO: enable to user to specify only private IP addresses 
+'''
+def test_ip4_gen(n):
+
+    ip4_gen()
+
+def test_ip4_to_binary(): 
+    addr = "192.168.1.1"
+    print(ip4_to_binary(addr, literal=True))
 
 
 if __name__ == '__main__':
-  test_ip4_gen()
+    test_ip4_to_binary()
 
 
